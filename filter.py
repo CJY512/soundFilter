@@ -4,8 +4,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
+#그래프를 그려줄 함수
 def show_plot(files):
+    #3행 2열로 구간 나눔
     fig, axes = plt.subplots(3,2)
+    #현재 경로
     path = os.getcwd()
     
     for idx, file in enumerate(files) :
@@ -69,7 +72,7 @@ def hum():
     wavfile.write(hum_filtered_file, sample_rate, hum_filtered_data.astype(np.int16))
     wavfile.write(hum_filtered_file2, sample_rate, hum_filtered_data2.astype(np.int16))
     
-# hum()
+hum()
 
 # highpass filter를 사용하면 removing hum이 어느 정도 가능하다.
 # 참고 https://github.com/hyorea1/wavFile_preprocessing/blob/main/waveFilter.ipynb
@@ -77,7 +80,6 @@ def hum():
 #       https://coding-yoon.tistory.com/23
 
 # electest는 어떻게 없애야 하나
-# 푸리에 변환 ?
 
 def elec():
     full_path = r'.\data\electest.wav'
@@ -92,6 +94,7 @@ def elec():
     elec_filtered_data2 *= 10000
     wavfile.write(elec_filtered_file, sample_rate, elec_filtered_data.astype(np.int16))
     wavfile.write(elec_filtered_file2, sample_rate, elec_filtered_data2.astype(np.int16))
+    #소리가 너무 작아서 amplitude 10000배
     data *= 10000
     wavfile.write(r'.\eleczz.wav',sample_rate,data.astype(np.int16))
     
